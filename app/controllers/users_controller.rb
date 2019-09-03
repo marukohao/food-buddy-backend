@@ -19,9 +19,14 @@ class UsersController < ApplicationController
     current_user_id = request.headers['userid']
     user = User.find(current_user_id)
     hosts = Host.all
-    joins = user.joins.map{|join| hosts.find(join.host_id)}
+    joins_json = user.joins.map{|join| 
+      {joined: join.joined, 
+        declined: join.declined, 
+        host: hosts.find(join.host_id), 
+        restaurant_name: hosts.find(join.host_id).restaurant.name}}
+    hosts_json = user.hosts.map{|host| {host: host, restaurant_name: host.restaurant.name}}
     # binding.pry
-    render json: { user: user, hosts: user.hosts, joins: joins}
+    render json: { user: user, hosts: hosts_json, joins: joins_json}
   end
 
 end

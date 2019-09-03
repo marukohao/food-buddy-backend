@@ -17,8 +17,20 @@ class HostsController < ApplicationController
       time: params[:time], 
       party: params[:party]
     )
-    puts host
-    render json: host
+    if host.valid?
+      render json: host
+    else
+      render json: { errors: "failed to create"}
+    end
+  end
+
+  def notification
+    current_user_id = request.headers['userid']
+    hosts = Host.all
+    hosts = hosts.select{|host| host.user_id == current_user_id.to_i}
+    hosts_json = hosts.map{|host| {joins: host.joins.map{|join| {join: join, user: join.user}}, host: host, restaurant_name: host.restaurant.name}}
+    # binding.pry
+    render json: hosts_json
   end
 
   def show
@@ -26,3 +38,5 @@ class HostsController < ApplicationController
     render json: host
   end
 end
+
+
