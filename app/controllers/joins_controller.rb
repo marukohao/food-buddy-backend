@@ -7,7 +7,7 @@ class JoinsController < ApplicationController
       declined: params[:declined]
     )
     if join.valid?
-      render json: host
+      render json: join
     else
       render json: { errors: "failed to create join"}
     end
@@ -17,8 +17,8 @@ class JoinsController < ApplicationController
     current_user_id = request.headers['userid']
     joins = Join.all
     joins = joins.select{|join| join.user_id == current_user_id.to_i}
-    joins_json = joins.map{|join| {join: join, host: join.host, restaurant_name: join.host.restaurant.name}}
     # binding.pry
+    joins_json = joins.map{|join| {join: join, host: join.host, restaurant_name: join.host.restaurant.name}}
     render json: joins_json
   end
 

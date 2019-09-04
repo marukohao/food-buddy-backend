@@ -18,7 +18,8 @@ class HostsController < ApplicationController
       party: params[:party]
     )
     if host.valid?
-      render json: host
+      host_json = {host: host, event_user: host.user, join_users: host.users}
+      render json: host_json
     else
       render json: { errors: "failed to create"}
     end
