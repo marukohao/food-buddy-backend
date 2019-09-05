@@ -9,6 +9,12 @@ class HostsController < ApplicationController
     render json: hosts_json
   end
 
+  def hostevents
+    hosts = Host.all
+    hosts = hosts.map{|host| {host: host, restaurant: host.restaurant, hoster: host.user}}
+    render json: hosts
+  end
+
   def create
     host = Host.create(
       user_id: params[:user_id], 
