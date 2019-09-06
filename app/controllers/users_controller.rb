@@ -23,11 +23,13 @@ class UsersController < ApplicationController
       {joined: join.joined, 
         declined: join.declined, 
         host: hosts.find(join.host_id), 
-        restaurant_name: hosts.find(join.host_id).restaurant.name}}
-      hosts_json = user.hosts.map{|host| {
-        host: host, 
-        restaurant_name: host.restaurant.name, 
-        joined_users: host.joins.select{|join| join.joined == true}.map{|join| join.user}}}
+        restaurant_name: hosts.find(join.host_id).restaurant.name,
+        restaurant_image: hosts.find(join.host_id).restaurant.image_url}}
+    hosts_json = user.hosts.map{|host| {
+      host: host, 
+      restaurant_name: host.restaurant.name,
+      restaurant_image: host.restaurant.image_url, 
+      joined_users: host.joins.select{|join| join.joined == true}.map{|join| join.user}}}
     # binding.pry
     render json: { user: user, hosts: hosts_json, joins: joins_json}
   end
