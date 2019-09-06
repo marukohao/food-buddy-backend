@@ -4,7 +4,8 @@ class HostsController < ApplicationController
     current_reataurant_id = request.headers['restaurantid']
     hosts = Host.all 
     hosts = hosts.select {|host| host.restaurant_id == current_reataurant_id.to_i}
-    hosts_json = hosts.map{|host| {host: host, event_user: host.user, join_users: host.users}}
+    # binding.pry
+    hosts_json = hosts.map{|host| {host: host, event_user: host.user, join_users: host.joins.select{|join| join.joined == true}.map{|join| join.user}, joins: host.joins.select{|join| join.joined == true}}}
     # binding.pry
     render json: hosts_json
   end
