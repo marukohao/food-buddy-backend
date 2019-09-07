@@ -15,6 +15,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update(username: params[:username], location: params[:location], bio: params[:bio])
+    render json: user
+  end
+
   def show 
     current_user_id = request.headers['userid']
     user = User.find(current_user_id)
