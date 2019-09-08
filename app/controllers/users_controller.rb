@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   end
 
   def show 
-    current_user_id = request.headers['userid']
-    user = User.find(current_user_id)
+    # current_user_id = request.headers['userid']
+    user = User.find(params[:id])
     hosts = Host.all
     joins_json = user.joins.map{|join| 
       {joined: join.joined, 
