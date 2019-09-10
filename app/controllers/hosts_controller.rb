@@ -41,6 +41,14 @@ class HostsController < ApplicationController
     render json: hosts_json
   end
 
+  def getmessages
+    host_id = request.headers['hostid']
+    host = Host.find(host_id)
+    messages = host.messages.map{|message| {message: message, created_at: message.created_at}}
+    # binding.pry
+    render json: messages
+  end
+
   def show
     host = Host.find(params[:id])
     render json: host
