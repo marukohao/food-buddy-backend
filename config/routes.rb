@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :hosts
   get '/notification', to: 'hosts#notification'
   get '/hostevents', to: 'hosts#hostevents'
-  resources :users, only: [:create, :show, :update]
+  resources :users, only: [:create, :show, :update, :index]
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
