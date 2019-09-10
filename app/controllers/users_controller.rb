@@ -33,6 +33,8 @@ class UsersController < ApplicationController
       {joined: join.joined, 
         declined: join.declined, 
         host: hosts.find(join.host_id), 
+        host_user: join.host.user,
+        join_users: join.host.users.select{|user| user.joins.find_by(host_id: join.host_id).joined == true},
         restaurant_name: hosts.find(join.host_id).restaurant.name,
         restaurant_image: hosts.find(join.host_id).restaurant.image_url}}
     hosts_json = user.hosts.map{|host| {
