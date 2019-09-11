@@ -13,7 +13,7 @@ class JoinsController < ApplicationController
     end
   end
 
-  def notification
+  def notification1
     current_user_id = request.headers['userid']
     joins = Join.all
     joins = joins.select{|join| join.user_id == current_user_id.to_i}

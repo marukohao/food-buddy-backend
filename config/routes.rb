@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :notifications
   resources :messages
   resources :restaurants
   resources :joins
-  get '/notifications', to: 'joins#notification'
+  get '/notification1', to: 'joins#notification1'
   resources :hosts
   get '/notification', to: 'hosts#notification'
   get '/hostevents', to: 'hosts#hostevents'

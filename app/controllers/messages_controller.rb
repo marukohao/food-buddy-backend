@@ -10,7 +10,6 @@ class MessagesController < ApplicationController
       host_id: params[:host_id], 
       message: params[:message],
       user_avatar: params[:user_avatar]
-      new: params[:new]
     )
     if message.valid?
       render json: message

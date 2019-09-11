@@ -4,4 +4,5 @@ class User < ApplicationRecord
   has_many :hosts
   has_many :restaurants, through: :hosts
   has_many :joins
+  has_many :notifications
 end
