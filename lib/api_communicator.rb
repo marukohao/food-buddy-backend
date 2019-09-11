@@ -6,7 +6,7 @@ class ApiUtils
 
   def self.get_restaurants_by_city
     puts "Here are the job results that returned"
-    url = "https://api.yelp.com/v3/businesses/search?location=NYC"
+    url = "https://api.yelp.com/v3/businesses/search?location=miami"
     resp = RestClient.get(url, headers={authorization: "Bearer 6d-T3xU_kI8nHO9NA7pssd8R98ptNV8KA61wRX3a74Oir-cL_D8VwRsIAcTSW3vIVG8onFO71bRPZF84MvySKLhlabYl4GNOWKRIO_B9MMn4A51KVWsgh7m6qbBmXXYx"})
     restaurant_info = JSON.parse(resp)
     # puts restaurant_info["businesses"].first
